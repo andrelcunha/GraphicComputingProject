@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 0
-  Top = 0
+  Left = 598
+  Top = 281
+  Width = 449
+  Height = 424
   Caption = 'Transforma'#231#245'es Geom'#233'tricas'
-  ClientHeight = 397
-  ClientWidth = 425
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -191,6 +191,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 7
+    Text = '0,5'
   end
   object Edit2_y: TEdit
     Left = 89
@@ -198,6 +199,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 8
+    Text = '-0,5'
   end
   object Edit2_x: TEdit
     Left = 50
@@ -205,6 +207,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 9
+    Text = '0,5'
   end
   object Edit3_x: TEdit
     Left = 50
@@ -212,6 +215,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 10
+    Text = '-0,5'
   end
   object Edit5_x: TEdit
     Left = 50
@@ -219,6 +223,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 11
+    Text = '0'
   end
   object Edit4_x: TEdit
     Left = 50
@@ -226,6 +231,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 12
+    Text = '-0,5'
   end
   object Edit4_y: TEdit
     Left = 89
@@ -233,6 +239,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 13
+    Text = '0,4'
   end
   object Edit3_y: TEdit
     Left = 89
@@ -240,6 +247,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 14
+    Text = '-0,5'
   end
   object Edit1_y: TEdit
     Left = 89
@@ -247,6 +255,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 15
+    Text = '0,4'
   end
   object Edit5_y: TEdit
     Left = 89
@@ -254,6 +263,7 @@ object Form1: TForm1
     Width = 33
     Height = 21
     TabOrder = 16
+    Text = '0,6'
   end
   object rem_button: TButton
     Left = 308

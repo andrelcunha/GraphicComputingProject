@@ -8,7 +8,6 @@
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
 #include <Grids.hpp>
-#include <vector>
 using namespace std;
 
 
@@ -61,8 +60,8 @@ __published:	// IDE-managed Components
     void __fastcall render_buttonClick(TObject *Sender);
 
 private:	// User declarations
-    vector<float> Xcoordinates;
-    vector<float> Ycoordinates;
+    float Xcoordinates[5];
+    float Ycoordinates[5];
 public:		// User declarations
     __fastcall TForm1(TComponent* Owner);
     float get_xcoord(int);

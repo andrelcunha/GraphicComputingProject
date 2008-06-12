@@ -25,6 +25,24 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::save_buttonClick(TObject *Sender)
 {
+    set_xcoord(0,StrToFloat(Edit1_x->Text));
+    set_ycoord(0,StrToFloat(Edit1_y->Text));
+
+    set_xcoord(1,StrToFloat(Edit2_x->Text));
+    set_ycoord(1,StrToFloat(Edit2_y->Text));
+
+    set_xcoord(2,StrToFloat(Edit3_x->Text));
+    set_ycoord(2,StrToFloat(Edit3_y->Text));
+
+    set_xcoord(3,StrToFloat(Edit4_x->Text));
+    set_ycoord(3,StrToFloat(Edit4_y->Text));
+
+    set_xcoord(4,StrToFloat(Edit5_x->Text));
+    set_ycoord(4,StrToFloat(Edit5_y->Text));
+
+    GL_window = new TGL_window(Application);
+    GL_window->ShowModal();
+
     /*
     int i, j;
     AnsiString array_str[3][3];
@@ -131,21 +149,34 @@ void __fastcall TForm1::render_buttonClick(TObject *Sender)
     GL_window->ShowModal();
 }
 //---------------------------------------------------------------------------
-void TForm1::set_xcoord(int x, float value){
-    Xcoordinates.push_back(value);
+
+void TForm1::set_xcoord(int x, float value)
+{
+    try{
+        Xcoordinates[x]=value;
+    }
+    catch(...){
+        Application->MessageBoxA("Caugh an exception","Erro",0);
+    }
 }
 //---------------------------------------------------------------------------
-void TForm1::set_ycoord(int y, float value){
-    Ycoordinates.push_back(value);
+
+void TForm1::set_ycoord(int y, float value)
+{
+    try{
+        Ycoordinates[y]=value;
+    }
+    catch(...){
+        Application->MessageBoxA("Caugh an exception","Erro",0);
+    }
 }
 //---------------------------------------------------------------------------
 float TForm1::get_xcoord(int x){
-    /* TODO : Alimentar vetores com coordenadas do form */
-    return 0;
+    return Xcoordinates[x];
 }
 //---------------------------------------------------------------------------
-float TForm1::get_ycoord(int y){
-    /* TODO : Alimentar vetores com coordenadas do form */
-    return 0;
+ float TForm1::get_ycoord(int y)
+{
+    return Ycoordinates[y];
 }
 //---------------------------------------------------------------------------

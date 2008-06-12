@@ -8,7 +8,7 @@
 #include <Forms.hpp>
 #include <gl\gl.h>
 #include <gl\glu.h>
-#include <gl\glut.h>
+//#include <gl\glut.h>  
 //---------------------------------------------------------------------------
 class TGL_window : public TForm
 {

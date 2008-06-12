@@ -1,9 +1,9 @@
 object GL_window: TGL_window
   Left = 366
   Top = 230
+  Width = 400
+  Height = 400
   Caption = 'Visualization'
-  ClientHeight = 373
-  ClientWidth = 392
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,8 +11,8 @@ object GL_window: TGL_window
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesigned
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
 end

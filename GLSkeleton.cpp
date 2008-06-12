@@ -2,7 +2,7 @@
 
 #include <vcl.h>
 #pragma hdrstop
-
+#include "main_form.h"
 #include "GLSkeleton.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -75,7 +75,7 @@ void __fastcall TGL_window::SetPixelFormatDescriptor()
 //---------------------------------------------------------------------------
 void __fastcall TGL_window::FormResize(TObject *Sender)
 {
-    //GLfloat nRange = 50.0;
+    GLfloat nRange = 50.0;
     w = ClientWidth;
     h = ClientHeight;
 
@@ -84,15 +84,15 @@ void __fastcall TGL_window::FormResize(TObject *Sender)
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-   /*
+
     if (w <= h)
         glOrtho (-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
     else
  glOrtho (-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
-     */
+
     //Projecao perspectiva
-    GLfloat aspect = (GLfloat)w/(GLfloat)h;
-    gluPerspective(30.0f, aspect, 1.0, 50.0);
+    //GLfloat aspect = (GLfloat)w/(GLfloat)h;
+    //gluPerspective(30.0f, aspect, 1.0, 50.0);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -110,10 +110,38 @@ void __fastcall TGL_window::RenderGLScene()
 void __fastcall TGL_window::DrawObjects()
 {
   //COLOCAR CÒDIGO PARA DESENHO DE GEOMETRIA AQUI
-
+    //COLOCAR CÒDIGO PARA DESENHO DE GEOMETRIA AQUI
+//  float degrade=0;
+  int i;
   glBegin(GL_LINE_LOOP);
-
+  glColor3f(0.0f,1.0f,0.0f);
+  for(i=0;i<5;i++){
+   //glColor3f(degrade,0.0f,0.0f);
+   glVertex2f((Form1->get_xcoord(i)),(Form1->get_ycoord(i)));
+    //degrade=degrade+0.2;
+  }
+  /*
+  glVertex2f( -0.40f, -0.40f);
+  glColor3f(0.0f,1.0f,0.0f);
+  glVertex2f(-0.40f, 0.40f);
+  glColor3f(0.0f,0.0f,1.0f);
+  glVertex2f( 0.40f, 0.40f);
+  glColor3f(0.0f,0.0f,0.0f);
+  glVertex2f( 0.40f, -0.40f);
+  */
   glEnd();
+  glFlush();
+  //glPushMatrix();
+  //glRotatef(90.f, 1, 0, 1 );
+  //glColor3f(1.0f,0.0f,0.0f);
+  //glutSolidTorus(0.2,0.6,200,400);
+  //glPopMatrix();
+ //glPushMatrix();
+  //glRotatef(45, 1, 0, 1 );
+  //glColor3f(0.2f,0.5f,0.3f);
+  //glutSolidTeapot(0.4);
+  //glPopMatrix();
+
 }
 
 //---------------------------------------------------------------------------
