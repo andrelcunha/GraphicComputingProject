@@ -38,7 +38,7 @@ void CPilha::push(float matrix_tmp[][3]){
 }
 //---------------------------------------------------------------------------
 Cmatrix* CPilha::pop(){
-	Cmatrix* tmp;
+	//Cmatrix* tmp;
 	if (empty())
 		exit(1);
 	return items[topo--];

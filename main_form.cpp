@@ -43,25 +43,7 @@ void __fastcall TForm1::save_buttonClick(TObject *Sender)
     GL_window = new TGL_window(Application);
     GL_window->ShowModal();
 
-    /*
-    int i, j;
-    AnsiString array_str[3][3];
-    array_str[0][0]=Edit->Text;
-    array_str[0][1]=Edit0_1->Text;
-    array_str[0][2]=Edit0_2->Text;
-    array_str[1][0]=Edit1_0->Text;
-    array_str[1][1]=Edit1_1->Text;
-    array_str[1][2]=Edit1_2->Text;
-    array_str[2][0]=Edit2_0->Text;
-    array_str[2][1]=Edit2_1->Text;
-    array_str[2][2]=Edit2_2->Text;
 
-    for(i=0;i<3;i++){
-        for(j=0;j<3;j++){
-            result_grid->Cells[j][i]=array_str[i][j];
-        }
-    }
-    */
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::add_buttonClick(TObject *Sender)
@@ -89,16 +71,22 @@ void __fastcall TForm1::calc_buttonClick(TObject *Sender)
 {
 //    op_combo->Text=op_list->Items->Strings[0];
 
-    int i,j;
+    int i,j, op;
     for (i=1;i<op_list->Count+1;i++) {
         try{
-            if (i>4) {
-                throw "Bad option ("+IntToStr(i)+")";
+
+            if (i>10004) {
+            //    throw "Bad option ("+IntToStr(i)+")";
             }
             else
-                operations.push_value(i,
-                    StrToFloat(op_parm1_list->Items->Strings[i-1]),
-                    StrToFloat(op_parm2_list->Items->Strings[i-1])
+                for(j=0;j<4;j++){
+                    if(op_list->Items->Strings[i-1]==op_combo->Items->Strings[j])
+                    op=j+1;
+                }
+
+                operations.push_value(op,
+                StrToFloat(op_parm1_list->Items->Strings[i-1]),
+                StrToFloat(op_parm2_list->Items->Strings[i-1])
                 );
         }catch (char * str){
             Application->MessageBoxA(str,"Erro",0);
@@ -114,7 +102,30 @@ void __fastcall TForm1::calc_buttonClick(TObject *Sender)
             result_grid->Cells[j][i]=FloatToStr(tmp->get_matrix(i,j));
         }
     }
-
+    for(i=0;i<5;i++){
+        calcula_pontos(i);
+    }
+    GL_window = new TGL_window(Application);
+    GL_window->ShowModal();
+    //---- cálculo ok!
+}
+//---------------------------------------------------------------------------
+void TForm1::calcula_pontos(int position){
+    float op[3][3];
+    Cmatrix *result;
+    for (int i=0;i<3;i++) {
+        for (int j=0; j<3 ;j++){
+            op[i][j]=StrToFloat(result_grid->Cells[j][i]);
+        }
+    }
+    operations.push(op);
+    operations.push_value(2,get_xcoord(position),get_ycoord(position));
+    operations.mult_matrix();
+    result=operations.pop();
+    set_xcoord(position,result->get_matrix(0,0));
+    set_ycoord(position,result->get_matrix(1,1));
+           /* TODO : Verificar calculo correto
+           da resultante sobre pontos -- escala ok */
 }
 //---------------------------------------------------------------------------
 
@@ -144,8 +155,9 @@ void __fastcall TForm1::op_comboChange(TObject *Sender)
 
 void __fastcall TForm1::render_buttonClick(TObject *Sender)
 {
+
+
     GL_window = new TGL_window(Application);
-    
     GL_window->ShowModal();
 }
 //---------------------------------------------------------------------------

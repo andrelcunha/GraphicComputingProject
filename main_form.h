@@ -68,6 +68,7 @@ public:		// User declarations
     float get_ycoord(int);
     void set_xcoord(int,float);
     void set_ycoord(int,float);
+    void calcula_pontos(int);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;

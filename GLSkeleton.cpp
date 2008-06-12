@@ -111,14 +111,14 @@ void __fastcall TGL_window::DrawObjects()
 {
   //COLOCAR CÒDIGO PARA DESENHO DE GEOMETRIA AQUI
     //COLOCAR CÒDIGO PARA DESENHO DE GEOMETRIA AQUI
-//  float degrade=0;
+  float degrade=0;
   int i;
-  glBegin(GL_LINE_LOOP);
+  glBegin(GL_TRIANGLE_FAN);
   glColor3f(0.0f,1.0f,0.0f);
   for(i=0;i<5;i++){
-   //glColor3f(degrade,0.0f,0.0f);
+   glColor3f(degrade,0.0f,0.0f);
    glVertex2f((Form1->get_xcoord(i)),(Form1->get_ycoord(i)));
-    //degrade=degrade+0.2;
+   degrade=degrade+0.2;
   }
   /*
   glVertex2f( -0.40f, -0.40f);
