@@ -17,9 +17,10 @@ __fastcall TGL_window::TGL_window(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TGL_window::IdleLoop(TObject*, bool& done)
 {
-    done = false;
-    RenderGLScene();
+    done= false;
+    FormPaint(this);
     SwapBuffers(hdc);    // USADO PARA DOUBLE BUFFERING
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TGL_window::FormCreate(TObject *Sender)
@@ -35,9 +36,8 @@ void __fastcall TGL_window::FormCreate(TObject *Sender)
     h = ClientHeight;
 
     glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_CULL_FACE);
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //cor de limpeza
-    SetupLighting();     //comentar para desabilitar luzes
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //cor de limpeza
+    //SetupLighting();     //comentar para desabilitar luzes
 }
 //---------------------------------------------------------------------------
 //   SetPixelFormatDescriptor()
@@ -65,7 +65,7 @@ void __fastcall TGL_window::SetPixelFormatDescriptor()
         0,0,
     };
     PixelFormat = ChoosePixelFormat(hdc, &pfd); //retorna o resultado do pedido
-                                        //sobre a avaliabilidade do pixel format
+                                        //sobre a disponibilidade do pixel format
     SetPixelFormat(hdc, PixelFormat, &pfd);//determina que hdc use &pdf
 }
 //---------------------------------------------------------------------------
@@ -75,12 +75,13 @@ void __fastcall TGL_window::SetPixelFormatDescriptor()
 //---------------------------------------------------------------------------
 void __fastcall TGL_window::FormResize(TObject *Sender)
 {
-    GLfloat nRange = 50.0;
+    /*
+    GLfloat nRange = 5.0;
     w = ClientWidth;
     h = ClientHeight;
 
     if(h == 0)
-     h = 1;
+         h = 1;
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -88,60 +89,32 @@ void __fastcall TGL_window::FormResize(TObject *Sender)
     if (w <= h)
         glOrtho (-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
     else
- glOrtho (-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
-
+ glOrtho (-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);/**/
+    /*
     //Projecao perspectiva
-    //GLfloat aspect = (GLfloat)w/(GLfloat)h;
-    //gluPerspective(30.0f, aspect, 1.0, 50.0);
+    GLfloat aspect = (GLfloat)w/(GLfloat)h;
+    gluPerspective(30.0f, aspect, 1.0, 50.0);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(40,60,100, 0,0,0, 0,1,0);
+    gluLookAt(40,60,100, 0,0,0, 0,1,0);  /**/
 }
 //---------------------------------------------------------------------------
-void __fastcall TGL_window::RenderGLScene()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    DrawObjects();
 
-    glFlush();
-}
-//---------------------------------------------------------------------------
 void __fastcall TGL_window::DrawObjects()
 {
   //COLOCAR CÒDIGO PARA DESENHO DE GEOMETRIA AQUI
-    //COLOCAR CÒDIGO PARA DESENHO DE GEOMETRIA AQUI
   float degrade=0;
   int i;
   glBegin(GL_TRIANGLE_FAN);
   glColor3f(0.0f,1.0f,0.0f);
   for(i=0;i<5;i++){
-   glColor3f(degrade,0.0f,0.0f);
-   glVertex2f((Form1->get_xcoord(i)),(Form1->get_ycoord(i)));
-   degrade=degrade+0.2;
+      glColor3f(degrade,0.0f,0.0f);
+      glVertex2f((Form1->get_xcoord(i)),(Form1->get_ycoord(i)));
+      degrade=degrade+0.2;
   }
-  /*
-  glVertex2f( -0.40f, -0.40f);
-  glColor3f(0.0f,1.0f,0.0f);
-  glVertex2f(-0.40f, 0.40f);
-  glColor3f(0.0f,0.0f,1.0f);
-  glVertex2f( 0.40f, 0.40f);
-  glColor3f(0.0f,0.0f,0.0f);
-  glVertex2f( 0.40f, -0.40f);
-  */
   glEnd();
   glFlush();
-  //glPushMatrix();
-  //glRotatef(90.f, 1, 0, 1 );
-  //glColor3f(1.0f,0.0f,0.0f);
-  //glutSolidTorus(0.2,0.6,200,400);
-  //glPopMatrix();
- //glPushMatrix();
-  //glRotatef(45, 1, 0, 1 );
-  //glColor3f(0.2f,0.5f,0.3f);
-  //glutSolidTeapot(0.4);
-  //glPopMatrix();
-
 }
 
 //---------------------------------------------------------------------------
@@ -164,20 +137,24 @@ void __fastcall TGL_window::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
     if(Key == VK_UP)
-        glRotatef(-5, 1.0, 0.0, 0.0);
+        glRotatef(-10, 2.0, 0.0, 0.0);
     if(Key == VK_DOWN)
-        glRotatef(5, 1.0, 0.0, 0.0);
+        glRotatef(10, 2.0, 0.0, 0.0);
     if(Key == VK_LEFT)
-        glRotatef(-5, 0.0, 1.0, 0.0);
+        glRotatef(-10, 0.0, 2.0, 0.0);
     if(Key == VK_RIGHT)
-        glRotatef(5, 0.0, 1.0, 0.0);
+        glRotatef(10, 0.0, 2.0, 0.0);
+    if(Key == VK_ESCAPE)
+        Hide();
+    if(Key == VK_SPACE)
+        Show();
 }
 //---------------------------------------------------------------------------
 //  SetupLighting()
 //---------------------------------------------------------------------------
 // habilita e determina os parâmetros de uma fonte de luz
 //---------------------------------------------------------------------------
-void __fastcall TGL_window::SetupLighting()
+/*void __fastcall TGL_window::SetupLighting()
 {
     GLfloat MaterialAmbient[] = {0.5, 0.5, 0.5, 1.0};
     GLfloat MaterialDiffuse[] = {1.0, 1.0, 1.0, 1.0};
@@ -198,6 +175,6 @@ void __fastcall TGL_window::SetupLighting()
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
     glShadeModel(GL_SMOOTH);
-}
+}*/
 //---------------------------------------------------------------------------
 

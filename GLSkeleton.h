@@ -29,7 +29,6 @@ private:
 public:
     __fastcall TGL_window(TComponent* Owner);
     void __fastcall IdleLoop(TObject*, bool&);
-    void __fastcall RenderGLScene();
     void __fastcall SetPixelFormatDescriptor();
     void __fastcall DrawObjects();
     void __fastcall SetupLighting();

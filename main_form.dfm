@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 598
-  Top = 281
+  Left = 278
+  Top = 242
   Width = 449
   Height = 424
   Caption = 'Transforma'#231#245'es Geom'#233'tricas'
@@ -165,15 +165,6 @@ object Form1: TForm1
     TabOrder = 4
     OnClick = add_buttonClick
   end
-  object calc_button: TButton
-    Left = 74
-    Top = 369
-    Width = 75
-    Height = 25
-    Caption = 'Calcular'
-    TabOrder = 5
-    OnClick = calc_buttonClick
-  end
   object result_grid: TStringGrid
     Left = 74
     Top = 282
@@ -183,14 +174,14 @@ object Form1: TForm1
     FixedCols = 0
     RowCount = 3
     FixedRows = 0
-    TabOrder = 6
+    TabOrder = 5
   end
   object Edit1_x: TEdit
     Left = 50
     Top = 52
     Width = 33
     Height = 21
-    TabOrder = 7
+    TabOrder = 6
     Text = '0,5'
   end
   object Edit2_y: TEdit
@@ -198,7 +189,7 @@ object Form1: TForm1
     Top = 79
     Width = 33
     Height = 21
-    TabOrder = 8
+    TabOrder = 7
     Text = '-0,5'
   end
   object Edit2_x: TEdit
@@ -206,7 +197,7 @@ object Form1: TForm1
     Top = 79
     Width = 33
     Height = 21
-    TabOrder = 9
+    TabOrder = 8
     Text = '0,5'
   end
   object Edit3_x: TEdit
@@ -214,7 +205,7 @@ object Form1: TForm1
     Top = 106
     Width = 33
     Height = 21
-    TabOrder = 10
+    TabOrder = 9
     Text = '-0,5'
   end
   object Edit5_x: TEdit
@@ -222,7 +213,7 @@ object Form1: TForm1
     Top = 160
     Width = 33
     Height = 21
-    TabOrder = 11
+    TabOrder = 10
     Text = '0'
   end
   object Edit4_x: TEdit
@@ -230,7 +221,7 @@ object Form1: TForm1
     Top = 133
     Width = 33
     Height = 21
-    TabOrder = 12
+    TabOrder = 11
     Text = '-0,5'
   end
   object Edit4_y: TEdit
@@ -238,7 +229,7 @@ object Form1: TForm1
     Top = 133
     Width = 33
     Height = 21
-    TabOrder = 13
+    TabOrder = 12
     Text = '0,4'
   end
   object Edit3_y: TEdit
@@ -246,7 +237,7 @@ object Form1: TForm1
     Top = 106
     Width = 33
     Height = 21
-    TabOrder = 14
+    TabOrder = 13
     Text = '-0,5'
   end
   object Edit1_y: TEdit
@@ -254,7 +245,7 @@ object Form1: TForm1
     Top = 52
     Width = 33
     Height = 21
-    TabOrder = 15
+    TabOrder = 14
     Text = '0,4'
   end
   object Edit5_y: TEdit
@@ -262,7 +253,7 @@ object Form1: TForm1
     Top = 160
     Width = 33
     Height = 21
-    TabOrder = 16
+    TabOrder = 15
     Text = '0,6'
   end
   object rem_button: TButton
@@ -271,7 +262,7 @@ object Form1: TForm1
     Width = 75
     Height = 25
     Caption = 'Remover'
-    TabOrder = 17
+    TabOrder = 16
     OnClick = rem_buttonClick
   end
   object render_button: TButton
@@ -280,7 +271,7 @@ object Form1: TForm1
     Width = 75
     Height = 25
     Caption = 'Renderizar'
-    TabOrder = 18
+    TabOrder = 17
     OnClick = render_buttonClick
   end
   object op_parm1_edit: TEdit
@@ -288,14 +279,14 @@ object Form1: TForm1
     Top = 52
     Width = 29
     Height = 21
-    TabOrder = 19
+    TabOrder = 18
   end
   object op_parm2_edit: TEdit
     Left = 354
     Top = 52
     Width = 29
     Height = 21
-    TabOrder = 20
+    TabOrder = 19
   end
   object op_parm1_list: TListBox
     Left = 319
@@ -303,7 +294,7 @@ object Form1: TForm1
     Width = 25
     Height = 76
     ItemHeight = 13
-    TabOrder = 21
+    TabOrder = 20
   end
   object op_parm2_list: TListBox
     Left = 358
@@ -311,6 +302,6 @@ object Form1: TForm1
     Width = 25
     Height = 76
     ItemHeight = 13
-    TabOrder = 22
+    TabOrder = 21
   end
 end

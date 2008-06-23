@@ -20,7 +20,7 @@ Cmatrix *tmp;
 __fastcall TForm1::TForm1(TComponent* Owner)
     : TForm(Owner)
 {
-
+    GL_window = new TGL_window(Application);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::save_buttonClick(TObject *Sender)
@@ -40,8 +40,7 @@ void __fastcall TForm1::save_buttonClick(TObject *Sender)
     set_xcoord(4,StrToFloat(Edit5_x->Text));
     set_ycoord(4,StrToFloat(Edit5_y->Text));
 
-    GL_window = new TGL_window(Application);
-    GL_window->ShowModal();
+    GL_window-> Show();
 
 
 }
@@ -64,57 +63,14 @@ void __fastcall TForm1::add_buttonClick(TObject *Sender)
         Application->MessageBoxA("Selecione um item","Erro",0);
     }
 }
-//---------------------------------------------------------------------------
 
-
-void __fastcall TForm1::calc_buttonClick(TObject *Sender)
-{
-//    op_combo->Text=op_list->Items->Strings[0];
-
-    int i,j, op;
-    for (i=1;i<op_list->Count+1;i++) {
-        try{
-
-            if (i>10004) {
-            //    throw "Bad option ("+IntToStr(i)+")";
-            }
-            else
-                for(j=0;j<4;j++){
-                    if(op_list->Items->Strings[i-1]==op_combo->Items->Strings[j])
-                    op=j+1;
-                }
-
-                operations.push_value(op,
-                StrToFloat(op_parm1_list->Items->Strings[i-1]),
-                StrToFloat(op_parm2_list->Items->Strings[i-1])
-                );
-        }catch (char * str){
-            Application->MessageBoxA(str,"Erro",0);
-            exit(1);
-        }
-    }
-    for(i=0;i<op_list->Count-1;i++){
-        operations.mult_matrix();
-    }
-    tmp=operations.pop();
-    for(i=0;i<3;i++){
-        for(j=0;j<3;j++){
-            result_grid->Cells[j][i]=FloatToStr(tmp->get_matrix(i,j));
-        }
-    }
-    for(i=0;i<5;i++){
-        calcula_pontos(i);
-    }
-    GL_window = new TGL_window(Application);
-    GL_window->ShowModal();
-    //---- cálculo ok!
-}
 //---------------------------------------------------------------------------
 void TForm1::calcula_pontos(int position){
     float op[3][3];
+    int count, i, j;
     Cmatrix *result;
-    for (int i=0;i<3;i++) {
-        for (int j=0; j<3 ;j++){
+    for ( i=0;i<3;i++) {
+        for ( j=0; j<3 ;j++){
             op[i][j]=StrToFloat(result_grid->Cells[j][i]);
         }
     }
@@ -144,7 +100,7 @@ void __fastcall TForm1::op_comboChange(TObject *Sender)
     op_parm2_edit->Text="";
     op_parm2_edit->Enabled=true;
     if (op_combo->Text=="Rotação") {
-        op_parm2_edit->Text="---";
+        op_parm2_edit->Text="0";
         op_parm2_edit->Enabled=false;
     }
     if(op_list->Count<5){
@@ -153,17 +109,38 @@ void __fastcall TForm1::op_comboChange(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::render_buttonClick(TObject *Sender)
-{
-
-
-    GL_window = new TGL_window(Application);
-    GL_window->ShowModal();
+void __fastcall TForm1::render_buttonClick(TObject *Sender){
+    int i,j, op;
+    for (i=1;i<op_list->Count+1;i++) {
+        for(j=0;j<4;j++){
+            if(op_list->Items->Strings[i-1]==op_combo->Items->Strings[j])
+                op=j+1;
+        }
+        operations.push_value(
+            op,
+            StrToFloat(op_parm1_list->Items->Strings[i-1]),
+            StrToFloat(op_parm2_list->Items->Strings[i-1])
+        );
+    }
+    for(i=0;i<op_list->Count-1;i++){
+        operations.mult_matrix();
+    }
+    tmp=operations.pop();
+    for(i=0;i<3;i++){
+       for(j=0;j<3;j++){
+           result_grid->Cells[j][i]=FloatToStr(tmp->get_matrix(i,j));
+       }
+    }
+    for(i=0;i<5;i++){
+         points_multiplication(i);
+    }
+    //GL_window = new TGL_window(Application);
+    GL_window->Show();
+    //---- cálculo ok!
 }
 //---------------------------------------------------------------------------
 
-void TForm1::set_xcoord(int x, float value)
-{
+void TForm1::set_xcoord(int x, float value){
     try{
         Xcoordinates[x]=value;
     }
@@ -173,8 +150,7 @@ void TForm1::set_xcoord(int x, float value)
 }
 //---------------------------------------------------------------------------
 
-void TForm1::set_ycoord(int y, float value)
-{
+void TForm1::set_ycoord(int y, float value){
     try{
         Ycoordinates[y]=value;
     }
@@ -187,8 +163,31 @@ float TForm1::get_xcoord(int x){
     return Xcoordinates[x];
 }
 //---------------------------------------------------------------------------
- float TForm1::get_ycoord(int y)
-{
+ float TForm1::get_ycoord(int y){
     return Ycoordinates[y];
+}
+//---------------------------------------------------------------------------
+void TForm1::points_multiplication(int position){
+    float  tmp=0, op[3][3], point[1][3], mR[1][3];
+    int count, i, j;
+    point[0][0]=get_xcoord(position);
+    point[0][1]=get_ycoord(position);
+    point[0][2]=1;
+    for ( i=0;i<3;i++) {
+        for ( j=0; j<3 ;j++){
+            op[i][j]=StrToFloat(result_grid->Cells[j][i]);
+        }
+    }
+    for (i=0;i<1;i++){
+		for(j=0;j<3;j++){
+			tmp=0;
+			for(count=0;count<3;count++){
+				tmp=tmp+point[i][count]*op[count][j];
+			}
+			mR[i][j]=tmp;
+		}
+	}
+    set_xcoord(position,mR[0][0]);
+    set_ycoord(position,mR[0][1]);
 }
 //---------------------------------------------------------------------------

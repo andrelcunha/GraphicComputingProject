@@ -22,7 +22,6 @@ __published:	// IDE-managed Components
     TButton *clean_button;
     TComboBox *op_combo;
     TButton *add_button;
-    TButton *calc_button;
     TStringGrid *result_grid;
     TEdit *Edit1_x;
     TEdit *Edit2_y;
@@ -54,10 +53,10 @@ __published:	// IDE-managed Components
     TLabel *Label14;
     void __fastcall save_buttonClick(TObject *Sender);
     void __fastcall add_buttonClick(TObject *Sender);
-    void __fastcall calc_buttonClick(TObject *Sender);
     void __fastcall rem_buttonClick(TObject *Sender);
     void __fastcall op_comboChange(TObject *Sender);
     void __fastcall render_buttonClick(TObject *Sender);
+   
 
 private:	// User declarations
     float Xcoordinates[5];
@@ -69,6 +68,7 @@ public:		// User declarations
     void set_xcoord(int,float);
     void set_ycoord(int,float);
     void calcula_pontos(int);
+    void points_multiplication(int);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;
