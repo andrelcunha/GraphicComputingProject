@@ -59,14 +59,22 @@ __published:	// IDE-managed Components
    
 
 private:	// User declarations
-    float Xcoordinates[5];
-    float Ycoordinates[5];
+    double Xcoordinates[5];
+    double Ycoordinates[5];
+    double center_point[2];
+    double triangle[3][2];
+    void mass_center();
+
+
 public:		// User declarations
     __fastcall TForm1(TComponent* Owner);
-    float get_xcoord(int);
-    float get_ycoord(int);
-    void set_xcoord(int,float);
-    void set_ycoord(int,float);
+    double get_xcoord(int);
+    double get_ycoord(int);
+    double get_triangleX(int);
+    double get_triangleY(int);
+    double get_point(int);
+    void set_xcoord(int,double);
+    void set_ycoord(int,double);
     void calcula_pontos(int);
     void points_multiplication(int);
 };

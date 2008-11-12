@@ -106,15 +106,23 @@ void __fastcall TGL_window::DrawObjects()
   //COLOCAR CÒDIGO PARA DESENHO DE GEOMETRIA AQUI
   float degrade=0;
   int i;
-  glBegin(GL_TRIANGLE_FAN);
-  glColor3f(0.0f,1.0f,0.0f);
-  for(i=0;i<5;i++){
-      glColor3f(degrade,0.0f,0.0f);
-      glVertex2f((Form1->get_xcoord(i)),(Form1->get_ycoord(i)));
-      degrade=degrade+0.2;
+
+  glBegin(GL_TRIANGLES);
+  for(i=0;i<3;i++){
+      glColor3f(1.0f,0.0f,0.0f);
+      glVertex2f((Form1->get_triangleX(i)),(Form1->get_triangleY(i)));
   }
   glEnd();
   glFlush();
+  glBegin(GL_POLYGON);
+  glColor3f(0.0f,0.0f,0.0f);
+  for(i=0;i<5;i++){
+      glColor3f(0.0f,0.0f,degrade);
+      glVertex2f((Form1->get_xcoord(i)),(Form1->get_ycoord(i)));
+      degrade=+0.33334;
+  }
+  glEnd();
+  glFlush();/**/
 }
 
 //---------------------------------------------------------------------------

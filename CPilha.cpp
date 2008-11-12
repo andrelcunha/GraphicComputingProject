@@ -13,7 +13,7 @@
 
 using namespace std;
 //---------------------------------------------------------------------------
-void CPilha::push_value(int type, float x, float y){
+void CPilha::push_value(int type, double x, double y){
   if (topo == MAXSTACK-1){
     // Pilha cheia
     cout << "The stack is full!" << endl;
@@ -25,7 +25,7 @@ void CPilha::push_value(int type, float x, float y){
   }
 }
 //---------------------------------------------------------------------------
-void CPilha::push(float matrix_tmp[][3]){
+void CPilha::push(double matrix_tmp[][3]){
   if (topo == MAXSTACK-1){
     // Pilha cheia
     cout << "The stack is full!" << endl;
@@ -49,7 +49,7 @@ void CPilha::mult_matrix(void) //implement push and pop utilization.
 	
 	int I,J,count;
 	Cmatrix *m_tmp;
-	float mA[3][3],mB[3][3], mR[3][3], tmp=0;
+	double mA[3][3],mB[3][3], mR[3][3], tmp=0;
 	m_tmp=pop();
 	get_matrix_full(m_tmp,mA);
 	m_tmp=pop();
@@ -69,10 +69,10 @@ void CPilha::mult_matrix(void) //implement push and pop utilization.
 	
 }
 //---------------------------------------------------------------------------
-void CPilha::mult_points(float mA[][3],float mB[][3],float mR[][3])
+void CPilha::mult_points(double mA[][3],double mB[][3],double mR[][3])
 {
 	int I,J,count;
-	float tmp=0;
+	double tmp=0;
 	for (I=0;I<3;I++){
 		for(J=0;J<3;J++){
 			tmp=0;
@@ -84,7 +84,7 @@ void CPilha::mult_points(float mA[][3],float mB[][3],float mR[][3])
 	}
 }
 //---------------------------------------------------------------------------
-void CPilha::get_matrix_full(Cmatrix *tmp, float matrix_tmp[][3])
+void CPilha::get_matrix_full(Cmatrix *tmp, double matrix_tmp[][3])
 {
 	int i,j;
 	for (i=0;i<3;i++){
@@ -94,7 +94,7 @@ void CPilha::get_matrix_full(Cmatrix *tmp, float matrix_tmp[][3])
 	}
 }
 //---------------------------------------------------------------------------
-void CPilha::set_matrix_full(Cmatrix *tmp, float matrix_tmp[][3])
+void CPilha::set_matrix_full(Cmatrix *tmp, double matrix_tmp[][3])
 {
 	int i,j;
 	for (i=0;i<3;i++){

@@ -23,15 +23,15 @@ Cmatrix::~Cmatrix(){
 	// TODO: put destructor code here
 }
 //---------------------------------------------------------------------------
-float Cmatrix::get_matrix(int i,int j){
+double Cmatrix::get_matrix(int i,int j){
 	return matrix_core[i][j];
 }
 //---------------------------------------------------------------------------
-void Cmatrix::set_matrix_value(float value,int i,int j){
+void Cmatrix::set_matrix_value(double value,int i,int j){
 	matrix_core[i][j]=value;
 }
 //---------------------------------------------------------------------------
-void Cmatrix::set_matrix(int type,float x,float y){
+void Cmatrix::set_matrix(int type,double x,double y){
     //try{
         switch (type){
             case 1 :		TRANS3f(x,y);//Translate
@@ -70,7 +70,7 @@ void Cmatrix::print_matrix(void){
 //---------------------------------------------------------------------------
 void Cmatrix::populating(void){
 	int i,j;
-	float r;
+	double r;
 	for(i=0,r=1;i<3;i++){
 		for(j=0;j<3;j++,r++){
 			matrix_core[i][j]=r;
@@ -79,19 +79,19 @@ void Cmatrix::populating(void){
 }
 //---------------------------------------------------------------------------
 
-void Cmatrix::TRANS3f(float Dx,float Dy){
+void Cmatrix::TRANS3f(double Dx,double Dy){
 	LOADIDENTITY();
 	matrix_core[2][0]=Dx;
 	matrix_core[2][1]=Dy;
 }
 //---------------------------------------------------------------------------
-void Cmatrix::SCALE3f(float Sx,float Sy){
+void Cmatrix::SCALE3f(double Sx,double Sy){
 	LOADIDENTITY();
 	matrix_core[0][0]=Sx;
 	matrix_core[1][1]=Sy;
 }
 //---------------------------------------------------------------------------
-void Cmatrix::ROTAT2f(float RO)  //RO value is in radians.
+void Cmatrix::ROTAT2f(double RO)  //RO value is in radians.
 {
 	LOADIDENTITY();
 	matrix_core[0][0]= cos(RO);
@@ -100,7 +100,7 @@ void Cmatrix::ROTAT2f(float RO)  //RO value is in radians.
 	matrix_core[1][1]= cos(RO);
 }
 //---------------------------------------------------------------------------
-void Cmatrix::SHEAR3f(float SHx,float SHy){
+void Cmatrix::SHEAR3f(double SHx,double SHy){
 	LOADIDENTITY();
 	matrix_core[0][1]=SHx;
 	matrix_core[1][0]=SHy;

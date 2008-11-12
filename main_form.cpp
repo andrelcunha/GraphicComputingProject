@@ -39,7 +39,7 @@ void __fastcall TForm1::save_buttonClick(TObject *Sender)
 
     set_xcoord(4,StrToFloat(Edit5_x->Text));
     set_ycoord(4,StrToFloat(Edit5_y->Text));
-
+    mass_center();
     GL_window-> Show();
 
 
@@ -66,7 +66,7 @@ void __fastcall TForm1::add_buttonClick(TObject *Sender)
 
 //---------------------------------------------------------------------------
 void TForm1::calcula_pontos(int position){
-    float op[3][3];
+    double op[3][3];
     int count, i, j;
     Cmatrix *result;
     for ( i=0;i<3;i++) {
@@ -140,7 +140,7 @@ void __fastcall TForm1::render_buttonClick(TObject *Sender){
 }
 //---------------------------------------------------------------------------
 
-void TForm1::set_xcoord(int x, float value){
+void TForm1::set_xcoord(int x, double value){
     try{
         Xcoordinates[x]=value;
     }
@@ -150,7 +150,7 @@ void TForm1::set_xcoord(int x, float value){
 }
 //---------------------------------------------------------------------------
 
-void TForm1::set_ycoord(int y, float value){
+void TForm1::set_ycoord(int y, double value){
     try{
         Ycoordinates[y]=value;
     }
@@ -159,16 +159,16 @@ void TForm1::set_ycoord(int y, float value){
     }
 }
 //---------------------------------------------------------------------------
-float TForm1::get_xcoord(int x){
+double TForm1::get_xcoord(int x){
     return Xcoordinates[x];
 }
 //---------------------------------------------------------------------------
- float TForm1::get_ycoord(int y){
+ double TForm1::get_ycoord(int y){
     return Ycoordinates[y];
 }
 //---------------------------------------------------------------------------
 void TForm1::points_multiplication(int position){
-    float  tmp=0, op[3][3], point[1][3], mR[1][3];
+    double  tmp=0, op[3][3], point[1][3], mR[1][3];
     int count, i, j;
     point[0][0]=get_xcoord(position);
     point[0][1]=get_ycoord(position);
@@ -191,3 +191,43 @@ void TForm1::points_multiplication(int position){
     set_ycoord(position,mR[0][1]);
 }
 //---------------------------------------------------------------------------
+void TForm1::mass_center(void)
+{
+
+    int current;
+    for(int i=0;i<3;i++){
+        if (i==0)current=0;
+        if (i==1)current=2;
+        if (i==2)current=3;
+        triangle[i][0]=Xcoordinates[0];
+        triangle[i][1]=Ycoordinates[0];
+        for (int j=0;j<2;j++){
+                triangle[i][0]=+Xcoordinates[current+j];
+                triangle[i][1]=+Ycoordinates[current+j];
+        }
+        triangle[i][0]=triangle[i][0]/3;
+        triangle[i][1]=triangle[i][1]/3;
+    }
+    center_point[0]=0;
+    center_point[1]=0;
+    for(int i=0;i<3;i++){
+        center_point[0]=+triangle[i][0];
+        center_point[1]=+triangle[i][1];
+    }
+    center_point[0]=center_point[0]/3;
+    center_point[1]=center_point[1]/3;
+}
+ //---------------------------------------------------------------------------
+double TForm1::get_triangleX(int i){
+    return triangle[i][0];
+}
+//---------------------------------------------------------------------------
+double TForm1::get_triangleY(int i){
+    return triangle[i][1];
+}
+//---------------------------------------------------------------------------
+ double TForm1::get_point(int i){
+    return center_point[i];
+}
+//---------------------------------------------------------------------------
+

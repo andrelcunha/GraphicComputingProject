@@ -10,20 +10,20 @@ class Cmatrix{
 public:
 	Cmatrix();
 	 ~Cmatrix();
-	float get_matrix(int,int);
-	void set_matrix_value(float,int,int );
-	void set_matrix(int,float,float);
+	double get_matrix(int,int);
+	void set_matrix_value(double,int,int );
+	void set_matrix(int,double,double);
 	void print_matrix(void);
 private:
-	float matrix_core[3][3];
+	double matrix_core[3][3];
 protected:
 	// Cmatrix variables
 	//methods
 	void populating(void);
-	void TRANS3f(float,float);
-	void SCALE3f(float,float);
-	void ROTAT2f(float);
-	void SHEAR3f(float,float);
+	void TRANS3f(double,double);
+	void SCALE3f(double,double);
+	void ROTAT2f(double);
+	void SHEAR3f(double,double);
     void LOADIDENTITY(void);
 };
 

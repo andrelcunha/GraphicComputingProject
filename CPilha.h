@@ -14,13 +14,13 @@ private:
 public:
   CPilha(){topo = -1;}
   ~CPilha();
-  void push_value(int,float,float);
-  void push(float [][3]);
+  void push_value(int,double,double);
+  void push(double [][3]);
   Cmatrix* pop();
   void mult_matrix(void);
-  void mult_points(float mA[][3],float mB[][3],float mR[][3]);
-  void get_matrix_full(Cmatrix *, float [][3]);
-  void set_matrix_full(Cmatrix *, float [][3]);
+  void mult_points(double mA[][3],double mB[][3],double mR[][3]);
+  void get_matrix_full(Cmatrix *, double [][3]);
+  void set_matrix_full(Cmatrix *, double [][3]);
   bool empty();
 };
 
